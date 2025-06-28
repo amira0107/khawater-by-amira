@@ -1,145 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khawater - خواطر | Whispers of the Soul</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
-        }
-        
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .card-professional {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-        }
-        
-        .mood-emerald { background: linear-gradient(135deg, #10b981, #34d399); }
-        .mood-amber { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
-        .mood-ocean { background: linear-gradient(135deg, #0ea5e9, #3b82f6); }
-        .mood-sunset { background: linear-gradient(135deg, #f97316, #fb923c); }
-        .mood-purple { background: linear-gradient(135deg, #a855f7, #c084fc); }
-        .mood-rose { background: linear-gradient(135deg, #ec4899, #f472b6); }
-        
-        .post-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .post-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>خواطر – Khawater</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
 </head>
-<body class="min-h-screen">
-    <div class="max-w-2xl mx-auto p-4 min-h-screen">
-        <!-- Header -->
-        <header class="glass-effect rounded-3xl p-6 mb-6 text-center">
-            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-heart text-white text-2xl"></i>
-            </div>
-            <h1 class="text-3xl font-bold text-white mb-2">خواطر</h1>
-            <p class="text-purple-100 text-lg">Khawater - Whispers of the Soul</p>
-            <p class="text-purple-200 text-sm mt-2">منصة الدعم النفسي</p>
-        </header>
-
-        <!-- Post Composer -->
-        <div class="card-professional rounded-3xl p-6 mb-6">
-            <div class="flex items-start space-x-4 rtl:space-x-reverse">
-                <div id="user-avatar" class="w-12 h-12 mood-purple rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-user text-white"></i>
-                </div>
-                <div class="flex-1">
-                    <textarea 
-                        id="post-content" 
-                        placeholder="شارك همستك مع المجتمع..."
-                        class="w-full bg-gray-50 rounded-2xl p-4 resize-none text-lg focus:outline-none focus:ring-2 focus:ring-purple-500 border-0"
-                        rows="3"
-                    ></textarea>
-                    
-                    <div class="flex items-center justify-between mt-4">
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                            <select id="mood-selector" class="bg-white border border-gray-300 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500">
-                                <option value="emerald">😌 مسالم</option>
-                                <option value="amber">😊 سعيد</option>
-                                <option value="ocean">😢 حزين</option>
-                                <option value="sunset">😰 قلق</option>
-                                <option value="purple">😇 هادئ</option>
-                                <option value="rose">🤗 داعم</option>
-                            </select>
-                            
-                            <label class="flex items-center space-x-2 rtl:space-x-reverse text-sm">
-                                <input type="checkbox" id="anonymous-toggle" class="rounded">
-                                <span class="text-gray-700">مجهول</span>
-                            </label>
-                        </div>
-                        
-                        <button 
-                            onclick="publishPost()" 
-                            id="post-btn" 
-                            class="btn-gradient text-white font-bold py-3 px-6 rounded-2xl"
-                        >
-                            نشر همسة
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Timeline -->
-        <div id="timeline" class="space-y-4">
-            <!-- Les posts apparaîtront ici -->
-        </div>
-
-        <!-- Footer -->
-        <footer class="glass-effect rounded-3xl p-6 mt-8 text-center">
-            <h3 class="text-xl font-bold text-white mb-2">🌸 Khawater -- Whispers of the Soul</h3>
-            <p class="text-purple-100">by <span class="font-bold">Amira Projects</span></p>
-        </footer>
+<body>
+  <div class="container">
+    <h1>خواطر – Khawater</h1>
+    <textarea id="postInput" placeholder="اكتب همستك هنا..."></textarea>
+    <div class="actions">
+      <select id="moodSelect">
+        <option value="😊">سعيد</option>
+        <option value="😢">حزين</option>
+        <option value="💭">تفكير</option>
+        <option value="😡">غاضب</option>
+      </select>
+      <button onclick="submitPost()">نشر الهمسة</button>
     </div>
-
-    <!-- Notification -->
-    <div id="notification" class="hidden fixed top-6 right-6 bg-white rounded-2xl p-4 shadow-lg z-50">
-        <div class="flex items-center space-x-3 rtl:space-x-reverse">
-            <i class="fas fa-check-circle text-green-500 text-xl"></i>
-            <span id="notification-text"></span>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    <div id="postsContainer" class="posts"></div>
+  </div>
 </body>
 </html>
